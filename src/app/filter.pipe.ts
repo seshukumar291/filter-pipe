@@ -5,11 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(value: Array<any>, args?: any): any {
-
-    // console.log('value', value);
-    console.log('args', args);
-
+  transform(value: Array<any>, args: number): any {
+    console.log('args', typeof args);
     if(args){
       let todos = value.filter(value => value.userId === +args);
       console.log('todos', todos);
