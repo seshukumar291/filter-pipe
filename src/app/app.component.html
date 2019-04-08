@@ -1,0 +1,26 @@
+
+<label for="">{{userRef.value}}</label>
+<select name="" id="" #userRef (change)="true">
+  <option value="">select user</option>
+  <option [value]="user.id" *ngFor="let user of users">{{user.name}}</option>
+</select>
+
+<div id="todos">
+  <ul>
+    <li *ngFor="let todo of todos | filter: userRef.value">Title : {{todo.title}} ---- User Id: {{todo.userId}}</li>
+  </ul>
+</div>
+
+<div *ngFor="let ref of refs">
+  <select name="" id="" #userRef (change)="true">
+  <option value="">select user</option>
+  <option [value]="user.id" *ngFor="let user of users">{{user.name}}</option>
+</select>
+
+{{userRef.value}}
+<div id="todos">
+  <ul>
+    <li *ngFor="let todo of todos | filter: userRef.value">Title : {{todo.title}} ---- User Id: {{todo.userId}}</li>
+  </ul>
+</div>
+</div>
