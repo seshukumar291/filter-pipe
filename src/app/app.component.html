@@ -1,26 +1,49 @@
-
-<label for="">{{userRef.value}}</label>
 <select name="" id="" #userRef (change)="true">
   <option value="">select user</option>
   <option [value]="user.id" *ngFor="let user of users">{{user.name}}</option>
 </select>
 
-<div id="todos">
-  <ul>
-    <li *ngFor="let todo of todos | filter: userRef.value">Title : {{todo.title}} ---- User Id: {{todo.userId}}</li>
-  </ul>
-</div>
-
-<div *ngFor="let ref of refs">
-  <select name="" id="" #userRef (change)="true">
-  <option value="">select user</option>
-  <option [value]="user.id" *ngFor="let user of users">{{user.name}}</option>
+<select name="" id="" #titleRef (change)="true">
+  <option value="">select title</option>
+  <option [value]="todo.id" *ngFor="let todo of todos | filter: userRef.value">{{todo.title}}</option>
 </select>
 
-{{userRef.value}}
+<button (click)="addTodo(userRef.value, titleRef.value)">Add</button>
+
 <div id="todos">
-  <ul>
-    <li *ngFor="let todo of todos | filter: userRef.value">Title : {{todo.title}} ---- User Id: {{todo.userId}}</li>
-  </ul>
-</div>
+    <table>
+      <thead>
+        <th>User Id</th>
+        <th>Title</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+
+      <tr *ngFor="let todoE of selectedTodos; index as i">
+        <ng-container *ngIf="!todoE.isEdit">
+          <td>{{todoE.userId}}</td>
+          <td>{{todoE.title}}</td>
+          
+          <td>
+            <button (click)="editRow(i)">Edit</button>
+          </td>
+        </ng-container>
+        <ng-container *ngIf="todoE.isEdit">
+            <select #userRef="ngModel" (change)="true" [(ngModel)]="todoE.userId" >
+              <option value="">select user</option>
+              <option [value]="user.id" 
+              *ngFor="let user of users">{{user.name}}</option>
+            </select>
+
+            <select  [(ngModel)]="todoE.title" (change)="true">
+              <option value="">select title</option>
+              <option [value]="todo.id" 
+              *ngFor="let todo of todos | filter: userRef.value">{{todo.title}}</option>
+            </select>
+        </ng-container>
+      </tr>
+
+        
+      </tbody>
+    </table>
 </div>
